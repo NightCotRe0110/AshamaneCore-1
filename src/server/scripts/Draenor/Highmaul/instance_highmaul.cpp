@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017-2018 AshamaneProject <https://github.com/AshamaneProject>
+ * Copyright (C) 2016 Firestorm Servers <https://firestorm-servers.com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -370,7 +371,7 @@ class instance_highmaul : public InstanceMapScript
                                 SendUpdateWorldState(eHighmaulWorldStates::UnknownHighmaulWorldState, 0);
                                 SendUpdateWorldState(eHighmaulWorldStates::UnknownHighmaulWorldState2, 0);
                                 PlaySceneForPlayers(g_PlayScenePos, 1338);
-                                CastSpellToPlayers(instance, nullptr, eHighmaulSpells::ChogallNight, true);
+                                DoCastSpellOnPlayers(eHighmaulSpells::ChogallNight);
 
                                 if (!instance->IsLFR() && m_KargathAchievement)
                                     DoCompleteAchievement(eHighmaulAchievements::FlameOn);

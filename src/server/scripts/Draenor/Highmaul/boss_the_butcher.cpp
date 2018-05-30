@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017-2018 AshamaneProject <https://github.com/AshamaneProject>
+ * Copyright (C) 2016 Firestorm Servers <https://firestorm-servers.com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -322,7 +323,7 @@ class boss_the_butcher : public CreatureScript
                     m_Instance->DoRemoveAurasDueToSpellOnPlayers(eSpells::TheTenderizer);
                     m_Instance->DoRemoveAurasDueToSpellOnPlayers(eSpells::SpellGushingWounds);
 
-                    CastSpellToPlayers(me->GetMap(), me, eSpells::ButcherBonusLoot, true);
+                    instance->DoCastSpellOnPlayers(eSpells::ButcherBonusLoot, me);
 
                     /*if (IsLFR())
                     {
@@ -526,7 +527,7 @@ class boss_the_butcher : public CreatureScript
 
                         for (uint8 l_I = 0; l_I < l_Count; ++l_I)
                         {
-                            float orientation = frand(0, 2 * M_PI);
+                            float orientation = frand(0.f, 2.f * float(M_PI));
                             float l_X = posX + (radius * cos(orientation));
                             float l_Y = posY + (radius * sin(orientation));
 

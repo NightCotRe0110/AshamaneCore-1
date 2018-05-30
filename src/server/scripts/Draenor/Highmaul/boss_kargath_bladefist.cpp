@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017-2018 AshamaneProject <https://github.com/AshamaneProject>
+ * Copyright (C) 2016 Firestorm Servers <https://firestorm-servers.com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -395,7 +396,7 @@ class boss_kargath_bladefist : public CreatureScript
                     m_Instance->SendEncounterUnit(EncounterFrameType::ENCOUNTER_FRAME_ENGAGE, me);
 
                     if (IsMythic())
-                        CastSpellToPlayers(me->GetMap(), nullptr, eSpells::SpellRoarOfTheCrowd, true);
+                        instance->DoCastSpellOnPlayers(eSpells::SpellRoarOfTheCrowd);
                 }
             }
 
@@ -427,7 +428,7 @@ class boss_kargath_bladefist : public CreatureScript
 
                 /// prevent the "unable to loot" after been killed
                 if(me->GetPositionZ() > 58)
-                    me->NearTeleportTo(me->GetPositionX(), me->GetPositionY(), 55.3, me->GetOrientation());
+                    me->NearTeleportTo(me->GetPositionX(), me->GetPositionY(), 55.3f, me->GetOrientation());
 
                 if (m_Instance)
                 {
@@ -446,7 +447,7 @@ class boss_kargath_bladefist : public CreatureScript
                     /*if (sObjectMgr->IsDisabledEncounter(m_Instance->GetEncounterIDForBoss(me), GetDifficulty()))
                         me->SetLootRecipient(nullptr);
                     else*/
-                        CastSpellToPlayers(me->GetMap(), me, eSpells::KargathBonusLoot, true);
+                        instance->DoCastSpellOnPlayers(eSpells::KargathBonusLoot, me);
 
                     ResetAllPlayersFavor(me);
 
@@ -2310,7 +2311,7 @@ class npc_highmaul_iron_grunt_second : public CreatureScript
                 if (Map* l_Map = me->GetMap())
                 {
                     if (l_Map->IsMythic())
-                        CastSpellToPlayers(l_Map, nullptr, eSpells::CrowdMinionKilled, true);
+                        instance->DoCastSpellOnPlayers(eSpells::CrowdMinionKilled);
                 }
             }
 
@@ -2656,9 +2657,9 @@ class npc_highmaul_chain_hurl_vehicle : public CreatureScript
                 if (!m_Rotate)
                     return;
 
-                m_Angle += (2.0f * M_PI) / 10.0f;
+                m_Angle += (2.0f * float(M_PI)) / 10.0f;
 
-                if (m_Angle > (2.0f * M_PI))
+                if (m_Angle > (2.0f * float(M_PI)))
                     m_Angle = 0.0f;
 
                 me->SetFacingTo(m_Angle);
@@ -3049,17 +3050,9 @@ public:
 
             if (!targets.empty())
             {
-                Unit* caster = GetCaster();
-
-                targets.remove_if([caster](WorldObject* p_Object) -> bool
+                targets.remove_if([](WorldObject* p_Object) -> bool
                 {
-                    if (p_Object == nullptr || p_Object->GetTypeId() != TypeID::TYPEID_PLAYER)
-                        return true;
- 
-                    if (p_Object->GetPositionZ() >= 62.4f)
-                        return true;
-
-                    return false;
+                    return !p_Object || !p_Object->IsPlayer() || p_Object->GetPositionZ() >= 62.4f;
                 });
             }
 
@@ -3190,7 +3183,7 @@ class spell_highmaul_chain_hurl : public SpellScriptLoader
                 std::list<Player*> l_DamagersList   = playerList;
 
                 uint8 l_OpenWoundsStacks = 0;
-                l_TanksList.remove_if([this, &l_OpenWoundsStacks](Player* player) -> bool
+                l_TanksList.remove_if([&l_OpenWoundsStacks](Player* player) -> bool
                 {
                     if (player->GetRoleForGroup() != Roles::ROLE_TANK)
                         return true;
@@ -3209,7 +3202,7 @@ class spell_highmaul_chain_hurl : public SpellScriptLoader
 
                 if (!l_TanksList.empty())
                 {
-                    l_TanksList.remove_if([this, l_OpenWoundsStacks](Player* player) -> bool
+                    l_TanksList.remove_if([l_OpenWoundsStacks](Player* player) -> bool
                     {
                         if (player->GetRoleForGroup() != Roles::ROLE_TANK)
                             return true;
@@ -3700,7 +3693,7 @@ class spell_highmaul_blade_dance : public SpellScriptLoader
 
                 std::list<Player*> l_SnapShot;
 
-                playerList.remove_if([this, caster, &l_SnapShot](Player* player) -> bool
+                playerList.remove_if([caster, &l_SnapShot](Player* player) -> bool
                 {
                     if (caster->GetDistance(player) <= 10.0f)
                     {
@@ -3757,9 +3750,9 @@ class spell_highmaul_correct_searchers : public SpellScriptLoader
                 {
                     Unit* caster = GetCaster();
 
-                    targets.remove_if([this, caster](WorldObject* p_Object) -> bool
+                    targets.remove_if([](WorldObject* p_Object) -> bool
                     {
-                        if (p_Object == nullptr || p_Object->GetTypeId() != TypeID::TYPEID_PLAYER)
+                        if (p_Object == nullptr || !p_Object->IsPlayer())
                             return true;
 
                         if (Player* player = p_Object->ToPlayer())

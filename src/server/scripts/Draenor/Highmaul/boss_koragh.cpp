@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017-2018 AshamaneProject <https://github.com/AshamaneProject>
+ * Copyright (C) 2016 Firestorm Servers <https://firestorm-servers.com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -503,7 +504,7 @@ class boss_koragh : public CreatureScript
                     me->DespawnCreaturesInArea(eHighmaulCreatures::VolatileAnomaly, 400);
                     summons.DespawnAll();
 
-                    CastSpellToPlayers(me->GetMap(), me, eSpells::KoraghBonus, true);
+                    instance->DoCastSpellOnPlayers(eSpells::KoraghBonus, me);
 
                     if (IsLFR())
                     {

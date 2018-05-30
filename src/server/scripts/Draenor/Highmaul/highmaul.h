@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017-2018 AshamaneProject <https://github.com/AshamaneProject>
+ * Copyright (C) 2016 Firestorm Servers <https://firestorm-servers.com>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -30,24 +31,6 @@
 #define HIGHMAUL_HPP
 
 Position const g_PlayScenePos = { 3448.069f, 7573.542f, 55.30419f, 0.3921495f };
-
-static void CastSpellToPlayers(Map* map, Unit* p_Caster, uint32 p_SpellID, bool p_Triggered)
-{
-    if (map == nullptr)
-        return;
-
-    Map::PlayerList const& players = map->GetPlayers();
-    for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
-    {
-        if (Player* player = itr->GetSource())
-        {
-            if (p_Caster != nullptr)
-                p_Caster->CastSpell(player, p_SpellID, p_Triggered);
-            else
-                player->CastSpell(player, p_SpellID, p_Triggered);
-        }
-    }
-}
 
 enum eHighmaulDatas
 {
