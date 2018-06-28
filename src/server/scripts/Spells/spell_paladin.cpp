@@ -483,33 +483,6 @@ class spell_pal_flash_of_light : public SpellScript
     }
 };
 
-// Holy Light - 82326
-class spell_pal_holy_light : public SpellScript
-{
-    PrepareSpellScript(spell_pal_holy_light);
-
-    void HandleOnHit(SpellEffIndex /*effIndex*/)
-    {
-        if (Unit* caster = GetCaster())
-        {
-            uint32 sp = caster->SpellBaseDamageBonusDone(SPELL_SCHOOL_MASK_SPELL);
-            uint32 dmg = uint32(1 + sp * 4.25f);
-
-            if (caster->HasAura(SPELL_PALADIN_INFUSION_OF_LIGHT_AURA))
-            {
-                caster->RemoveAura(SPELL_PALADIN_INFUSION_OF_LIGHT_AURA);
-            }
-
-            SetHitHeal(dmg);
-        }
-    }
-
-    void Register() override
-    {
-        OnEffectHitTarget += SpellEffectFn(spell_pal_holy_light::HandleOnHit, EFFECT_0, SPELL_EFFECT_HEAL);
-    }
-};
-
 // Crusader Strike - 35395
 class spell_pal_crusader_strike : public SpellScript
 {
@@ -2279,35 +2252,28 @@ public:
     }
 };
 
-// Consecration - 26573 and 205228
-// AreaTriggerID - 4488
-struct at_pal_consecration : AreaTriggerAI
+// Consecration - 26573 (retribution)
+// Consecration - 205228 (protection)
+class spell_pal_consecration : public AuraScript
 {
-    at_pal_consecration(AreaTrigger* areatrigger) : AreaTriggerAI(areatrigger)
-    {
-        timeInterval = 1000;
-    }
+    PrepareAuraScript(spell_pal_consecration);
 
-    void OnUpdate(uint32 diff) override
+    void OnTick(AuraEffect const* /*auraEff*/)
     {
-        Unit* caster = at->GetCaster();
-        if (!caster || !caster->IsPlayer())
-            return;
-
-        if (timeInterval <= diff)
+        if (Unit* caster = GetCaster())
         {
-            timeInterval -= diff;
-            return;
+            std::vector<AreaTrigger*> ATList = caster->GetAreaTriggers(GetSpellInfo()->Id);
+            for (AreaTrigger* at : ATList)
+            {
+                caster->CastSpell(at->GetPosition(), SPELL_PALADIN_CONSECRATION_DAMAGE, true);
+            }
         }
-
-        caster->CastSpell(at->GetPosition(), SPELL_PALADIN_CONSECRATION_DAMAGE, true);
-        if (caster->HasSpell(SPELL_PALADIN_CONSECRATED_GROUND))
-            caster->CastSpell(at->GetPosition(), SPELL_PALADIN_CONSECRATION_HEAL, true);
-
-        timeInterval = 1 * IN_MILLISECONDS;
     }
-private:
-    uint32 timeInterval;
+
+    void Register() override
+    {
+        OnEffectPeriodic += AuraEffectPeriodicFn(spell_pal_consecration::OnTick, EFFECT_0, SPELL_AURA_PERIODIC_DUMMY);
+    }
 };
 
 void AddSC_paladin_spell_scripts()
@@ -2349,7 +2315,6 @@ void AddSC_paladin_spell_scripts()
     RegisterSpellScript(spell_pal_avengers_shield);
     RegisterSpellScript(spell_pal_shield_of_the_righteous);
     RegisterSpellScript(spell_pal_light_of_the_protector);
-    RegisterSpellScript(spell_pal_holy_light);
     RegisterSpellScript(spell_pal_flash_of_light);
     RegisterSpellScript(spell_pal_crusader_strike);
     RegisterSpellScript(spell_pal_beacon_of_faith);
@@ -2368,10 +2333,10 @@ void AddSC_paladin_spell_scripts()
     RegisterAuraScript(spell_pal_ardent_defender);
     RegisterCastSpellOnProcAuraScript("spell_pal_fervent_martyr", EFFECT_0, SPELL_AURA_DUMMY, SPELL_PALADIN_FERVENT_MARTYR_BUFF); // 196923
     RegisterAuraScript(spell_pal_crusade);
+    RegisterAuraScript(spell_pal_consecration);
 
     // NPC Scripts
     RegisterCreatureAI(npc_pal_lights_hammer);
 
     // Area Trigger scripts
-    RegisterAreaTriggerAI(at_pal_consecration);
 }

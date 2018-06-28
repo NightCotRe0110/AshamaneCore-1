@@ -824,6 +824,9 @@ struct CriteriaEntry
         // CRITERIA_TYPE_FISH_IN_GAMEOBJECT     = 72
         uint32 GameObjectID;
 
+        //CRITERIA_TYPE_SEND_EVENT_SCENARIO     = 92
+        uint32 ScenarioEventID;
+
         // CRITERIA_TYPE_HIGHEST_POWER          = 96
         uint32 PowerType;
 
@@ -1998,6 +2001,15 @@ struct MapEntry
     bool IsWorldPvPMap() const { return (Flags[1] & MAP_FLAG2_WORLD_PVP) != 0; }
 };
 
+struct MapChallengeModeEntry
+{
+    LocalizedString* Name;
+    uint32 ID;
+    uint16 MapID;
+    int16 CriteriaCount[3];
+    uint8 Flags;
+};
+
 struct MapDifficultyEntry
 {
     uint32 ID;
@@ -2419,6 +2431,59 @@ struct RulesetItemUpgradeEntry
     uint32 ID;
     int32 ItemID;
     uint16 ItemUpgradeID;
+};
+
+struct QuestPOIBlobEntry
+{
+    int32       Id;
+    int16       MapId;
+    uint16      WorldMapAreaId;
+    uint8       NumPoints;
+    uint8       Floor;
+    int32       PlayerConditionId;
+    uint32      QuestId;
+    uint32      ObjectiveIndex;
+};
+
+struct QuestPOIPointEntry
+{
+    int32      Id;
+    int16      X;
+    int16      Y;
+    int32      QuestPoiBlobId;
+};
+
+struct ResearchBranchEntry
+{
+    uint32 Id;
+    LocalizedString* Name;
+    int32 ItemId;
+    uint16 CurrencyId;
+    uint8 ResearchFieldId;
+    int32 TextureFileId;
+    int32 BigTextureFileId;
+};
+
+struct ResearchProjectEntry
+{
+    LocalizedString* Name;
+    LocalizedString* Description;
+    int32 SpellId;
+    uint16 ResearchBranchId;
+    uint8 Rarity;
+    uint8 NumSockets;
+    uint32 Id;
+    uint32 TextureFileId;
+    int32 RequiredWeight;
+};
+
+struct ResearchSiteEntry
+{
+    uint32 Id;
+    LocalizedString* Name;
+    int32 QuestPoiBlobId;
+    int16 MapId;
+    int32 AreaPOIIconEnum;
 };
 
 struct SandboxScalingEntry

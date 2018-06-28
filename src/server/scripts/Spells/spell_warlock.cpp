@@ -42,10 +42,42 @@
 
 enum WarlockSpells
 {
+    SPELL_WARLOCK_ABSOLUTE_CORRUPTION               = 196103,
     SPELL_WARLOCK_AFTERMATH_STUN                    = 85387,
+    SPELL_WARLOCK_AGONY                             = 980,
+    SPELL_WARLOCK_ARCHIMONDES_VENGEANCE_COOLDOWN    = 116405,
+    SPELL_WARLOCK_ARCHIMONDES_VENGEANCE_DAMAGE      = 124051,
+    SPELL_WARLOCK_ARCHIMONDES_VENGEANCE_PASSIVE     = 116403,
+    SPELL_WARLOCK_BACKDRAFT                         = 117828,
+    SPELL_WARLOCK_BACKDRAFT_AURA                    = 196406,
     SPELL_WARLOCK_BANE_OF_DOOM_EFFECT               = 18662,
+    SPELL_WARLOCK_BURNING_RUSH                      = 111400,
+    SPELL_WARLOCK_CALL_DREADSTALKERS                = 104316,
+    SPELL_WARLOCK_CALL_DREADSTALKERS_SUMMON         = 193331,
+    SPELL_WARLOCK_CHANNEL_DEMONFIRE_ACTIVATOR       = 228312,
+    SPELL_WARLOCK_CHANNEL_DEMONFIRE_DAMAGE          = 196448,
+    SPELL_WARLOCK_COMMAND_DEMON_OVERRIDER           = 119904,
+    SPELL_WARLOCK_CONFLAGRATE                       = 17962,
+    SPELL_WARLOCK_CONFLAGRATE_FIRE_AND_BRIMSTONE    = 108685,
+    SPELL_WARLOCK_CORRUPTION                        = 172,
+    SPELL_WARLOCK_CORRUPTION_DAMAGE                 = 146739,
     SPELL_WARLOCK_CREATE_HEALTHSTONE                = 23517,
     SPELL_WARLOCK_CURSE_OF_DOOM_EFFECT              = 18662,
+    SPELL_WARLOCK_DARK_BARGAIN_DOT                  = 110914,
+    SPELL_WARLOCK_DARK_REGENERATION                 = 108359,
+    SPELL_WARLOCK_DARK_SOUL_INSTABILITY             = 113858,
+    SPELL_WARLOCK_DARK_SOUL_KNOWLEDGE               = 113861,
+    SPELL_WARLOCK_DARK_SOUL_MISERY                  = 113860,
+    SPELL_WARLOCK_DECIMATE_AURA                     = 108869,
+    SPELL_WARLOCK_DEMON_SOUL_FELGUARD               = 79452,
+    SPELL_WARLOCK_DEMON_SOUL_FELHUNTER              = 79460,
+    SPELL_WARLOCK_DEMON_SOUL_IMP                    = 79459,
+    SPELL_WARLOCK_DEMON_SOUL_SUCCUBUS               = 79453,
+    SPELL_WARLOCK_DEMON_SOUL_VOIDWALKER             = 79454,
+    SPELL_WARLOCK_DEMONBOLT                         = 157695,
+    SPELL_WARLOCK_DEMONIC_CALL                      = 114925,
+    SPELL_WARLOCK_DEMONIC_CALLING                   = 205145,
+    SPELL_WARLOCK_DEMONIC_CALLING_TRIGGER           = 205146,
     SPELL_WARLOCK_DEMONIC_CIRCLE_ALLOW_CAST         = 62388,
     SPELL_WARLOCK_DEMONIC_CIRCLE_SUMMON             = 48018,
     SPELL_WARLOCK_DEMONIC_CIRCLE_TELEPORT           = 48020,
@@ -54,154 +86,120 @@ enum WarlockSpells
     SPELL_WARLOCK_DEMONIC_EMPOWERMENT_IMP           = 54444,
     SPELL_WARLOCK_DEMONIC_EMPOWERMENT_SUCCUBUS      = 54435,
     SPELL_WARLOCK_DEMONIC_EMPOWERMENT_VOIDWALKER    = 54443,
-    SPELL_WARLOCK_DEMON_SOUL_IMP                    = 79459,
-    SPELL_WARLOCK_DEMON_SOUL_FELHUNTER              = 79460,
-    SPELL_WARLOCK_DEMON_SOUL_FELGUARD               = 79452,
-    SPELL_WARLOCK_DEMON_SOUL_SUCCUBUS               = 79453,
-    SPELL_WARLOCK_DEMON_SOUL_VOIDWALKER             = 79454,
+    SPELL_WARLOCK_DEMONIC_GATEWAY_PERIODIC_CHARGE   = 113901,
+    SPELL_WARLOCK_DEMONIC_GATEWAY_SUMMON_GREEN      = 113886,
+    SPELL_WARLOCK_DEMONIC_GATEWAY_TELEPORT_GREEN    = 113896,
+    SPELL_WARLOCK_DEMONIC_GATEWAY_TELEPORT_PURPLE   = 120729,
+    SPELL_WARLOCK_DEMONIC_LEAP_JUMP                 = 109163,
+    SPELL_WARLOCK_DEMONSKIN                         = 219272,
+    SPELL_WARLOCK_DEMONWRATH_AURA                   = 193440,
+    SPELL_WARLOCK_DEMONWRATH_SOULSHARD              = 194379,
+    SPELL_WARLOCK_DESTRUCTION_PASSIVE               = 137046,
     SPELL_WARLOCK_DEVOUR_MAGIC_HEAL                 = 19658,
+    SPELL_WARLOCK_DISRUPTED_NETHER                  = 114736,
+    SPELL_WARLOCK_DOOM                              = 603,
+    SPELL_WARLOCK_DOOM_SOUL_SHARD                   = 193318,
+    SPELL_WARLOCK_DRAIN_LIFE_HEAL                   = 89653,
+    SPELL_WARLOCK_ERADICATION                       = 196412,
+    SPELL_WARLOCK_ERADICATION_DEBUFF                = 196414,
+    SPELL_WARLOCK_EYE_LASER                         = 205231,
+    SPELL_WARLOCK_FEAR                              = 5782,
+    SPELL_WARLOCK_FEAR_BUFF                         = 118699,
+    SPELL_WARLOCK_FEAR_EFFECT                       = 118699,
+    SPELL_WARLOCK_FEL_FIREBOLT                      = 104318,
     SPELL_WARLOCK_FEL_SYNERGY_HEAL                  = 54181,
+    SPELL_WARLOCK_FIRE_AND_BRIMSTONE                = 196408,
+    SPELL_WARLOCK_GLYPH_OF_CONFLAGRATE              = 56235,
     SPELL_WARLOCK_GLYPH_OF_DEMON_TRAINING           = 56249,
+    SPELL_WARLOCK_GLYPH_OF_FEAR                     = 56244,
+    SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT              = 130616,
     SPELL_WARLOCK_GLYPH_OF_SHADOWFLAME              = 63311,
     SPELL_WARLOCK_GLYPH_OF_SIPHON_LIFE              = 63106,
+    SPELL_WARLOCK_GLYPH_OF_SOULWELL                 = 58094,
+    SPELL_WARLOCK_GLYPH_OF_SOULWELL_VISUAL          = 34145,
+    SPELL_WARLOCK_GRIMOIRE_FELGUARD                 = 111898,
+    SPELL_WARLOCK_GRIMOIRE_FELHUNTER                = 111897,
+    SPELL_WARLOCK_GRIMOIRE_IMP                      = 111859,
+    SPELL_WARLOCK_GRIMOIRE_OF_SACRIFICE             = 108503,
+    SPELL_WARLOCK_GRIMOIRE_OF_SYNERGY_BUFF          = 171982,
+    SPELL_WARLOCK_GRIMOIRE_SUCCUBUS                 = 111896,
+    SPELL_WARLOCK_GRIMOIRE_VOIDWALKER               = 111895,
+    SPELL_WARLOCK_HAND_OF_DOOM                      = 196283,
+    SPELL_WARLOCK_HAND_OF_GULDAN_DAMAGE             = 86040,
+    SPELL_WARLOCK_HAND_OF_GULDAN_SUMMON             = 196282,
+    SPELL_WARLOCK_HARVEST_LIFE_HEAL                 = 125314,
     SPELL_WARLOCK_HAUNT                             = 48181,
-    SPELL_WARLOCK_HAUNT_HEAL                        = 48210,
+    SPELL_WARLOCK_HAVOC                             = 80240,
+    SPELL_WARLOCK_HEALTH_FUNNEL_HEAL                = 217979,
     SPELL_WARLOCK_IMMOLATE                          = 348,
+    SPELL_WARLOCK_IMMOLATE_DOT                      = 157736,
+    SPELL_WARLOCK_IMMOLATE_FIRE_AND_BRIMSTONE       = 108686,
+    SPELL_WARLOCK_IMMOLATE_PROC                     = 193541,
+    SPELL_WARLOCK_IMPENDING_DOOM                    = 196270,
+    SPELL_WARLOCK_IMPENDING_DOOM_SUMMON             = 196271,
+    SPELL_WARLOCK_IMPLOSION_DAMAGE                  = 196278,
+    SPELL_WARLOCK_IMPLOSION_JUMP                    = 205205,
+    SPELL_WARLOCK_IMPROVED_DREADSTALKERS            = 196272,
     SPELL_WARLOCK_IMPROVED_SOUL_FIRE_PCT            = 85383,
     SPELL_WARLOCK_IMPROVED_SOUL_FIRE_STATE          = 85385,
+    SPELL_WARLOCK_INCINERATE                        = 29722,
+    SPELL_WARLOCK_ITEM_S12_TIER_4                   = 131632,
+    SPELL_WARLOCK_KIL_JAEDENS_CUNNING_PASSIVE       = 108507,
     SPELL_WARLOCK_LIFE_TAP_ENERGIZE                 = 31818,
     SPELL_WARLOCK_LIFE_TAP_ENERGIZE_2               = 32553,
-    SPELL_WARLOCK_NETHER_WARD                       = 91711,
+    SPELL_WARLOCK_METAMORPHOSIS                     = 103958,
+    SPELL_WARLOCK_MOLTEN_CORE                       = 122355,
+    SPELL_WARLOCK_MOLTEN_CORE_AURA                  = 122351,
     SPELL_WARLOCK_NETHER_TALENT                     = 91713,
+    SPELL_WARLOCK_NETHER_WARD                       = 91711,
+    SPELL_WARLOCK_NIGHTFALL                         = 108558,
+    SPELL_WARLOCK_PHANTOMATIC_SINGULARITY           = 205179,
+    SPELL_WARLOCK_PHANTOMATIC_SINGULARITY_DAMAGE    = 205246,
+    SPELL_WARLOCK_POWER_TRIP                        = 196605,
+    SPELL_WARLOCK_POWER_TRIP_ENERGIZE               = 216125,
+    SPELL_WARLOCK_PYROCLASM                         = 123686,
+    SPELL_WARLOCK_RAIN_OF_FIRE_DAMAGE               = 42223,
+    SPELL_WARLOCK_ROARING_BLAZE                     = 205184,
+    SPELL_WARLOCK_SEED_OF_CURRUPTION                = 27243,
+    SPELL_WARLOCK_SEED_OF_CURRUPTION_DAMAGE         = 27285,
+    SPELL_WARLOCK_SHADOW_BOLT                       = 686,
+    SPELL_WARLOCK_SHADOW_BOLT_SHOULSHARD            = 194192,
     SPELL_WARLOCK_SHADOW_TRANCE                     = 17941,
-    SPELL_WARLOCK_SIPHON_LIFE_HEAL                  = 63106,
     SPELL_WARLOCK_SHADOW_WARD                       = 6229,
-    SPELL_WARLOCK_SOULSHATTER                       = 32835,
+    SPELL_WARLOCK_SHADOWBURN_ENERGIZE               = 125882,
+    SPELL_WARLOCK_SHADOWFLAME                       = 47960,
+    SPELL_WARLOCK_SHADOWY_INSPIRATION               = 196269,
+    SPELL_WARLOCK_SHADOWY_INSPIRATION_EFFECT        = 196606,
+    SPELL_WARLOCK_SHIELD_OF_SHADOW                  = 115232,
+    SPELL_WARLOCK_SIPHON_LIFE_HEAL                  = 63106,
+    SPELL_WARLOCK_SOUL_CONDUIT_REFUND               = 215942,
+    SPELL_WARLOCK_SOUL_LEECH                        = 228974,
+    SPELL_WARLOCK_SOUL_LEECH_ABSORB                 = 108366,
+    SPELL_WARLOCK_SOUL_LEECH_AURA                   = 108370,
+    SPELL_WARLOCK_SOUL_LINK_DUMMY_AURA              = 108446,
+    SPELL_WARLOCK_SOUL_SWAP_AURA                    = 86211,
     SPELL_WARLOCK_SOUL_SWAP_CD_MARKER               = 94229,
-    SPELL_WARLOCK_SOUL_SWAP_OVERRIDE                = 86211,
-    SPELL_WARLOCK_SOUL_SWAP_MOD_COST                = 92794,
     SPELL_WARLOCK_SOUL_SWAP_DOT_MARKER              = 92795,
+    SPELL_WARLOCK_SOUL_SWAP_MOD_COST                = 92794,
+    SPELL_WARLOCK_SOUL_SWAP_OVERRIDE                = 86211,
+    SPELL_WARLOCK_SOUL_SWAP_VISUAL                  = 92795,
+    SPELL_WARLOCK_SOULSHATTER                       = 32835,
+    SPELL_WARLOCK_SOULWELL_CREATE_HEALTHSTONE       = 34130,
+    SPELL_WARLOCK_SOW_THE_SEEDS                     = 196226,
+    SPELL_WARLOCK_SPAWN_PURPLE_DEMONIC_GATEWAY      = 113890,
+    SPELL_WARLOCK_SUMMON_DREADSTALKER               = 193332,
+    SPELL_WARLOCK_SUPPLANT_DEMONIC_COMMAND          = 119904,
+    SPELL_WARLOCK_THREATENING_PRESENCE              = 112042,
+    SPELL_WARLOCK_TWILIGHT_WARD_METAMORPHOSIS_S12   = 131624,
+    SPELL_WARLOCK_TWILIGHT_WARD_S12                 = 131623,
     SPELL_WARLOCK_UNSTABLE_AFFLICTION               = 30108,
-    SPELL_WARLOCK_UNSTABLE_AFFLICTION_DISPEL        = 196364,
     SPELL_WARLOCK_UNSTABLE_AFFLICTION_DAMAGE_1      = 233490,
     SPELL_WARLOCK_UNSTABLE_AFFLICTION_DAMAGE_2      = 233496,
     SPELL_WARLOCK_UNSTABLE_AFFLICTION_DAMAGE_3      = 233497,
     SPELL_WARLOCK_UNSTABLE_AFFLICTION_DAMAGE_4      = 233498,
     SPELL_WARLOCK_UNSTABLE_AFFLICTION_DAMAGE_5      = 233499,
-    SPELL_WARLOCK_AGONY                             = 980,
-    SPELL_WARLOCK_ARCHIMONDES_VENGEANCE_COOLDOWN    = 116405,
-    SPELL_WARLOCK_ARCHIMONDES_VENGEANCE_DAMAGE      = 124051,
-    SPELL_WARLOCK_ARCHIMONDES_VENGEANCE_PASSIVE     = 116403,
-    SPELL_WARLOCK_BACKDRAFT                         = 117828,
-    SPELL_WARLOCK_CONFLAGRATE                       = 17962,
-    SPELL_WARLOCK_CONFLAGRATE_FIRE_AND_BRIMSTONE    = 108685,
-    SPELL_WARLOCK_CORRUPTION                        = 172,
-    SPELL_WARLOCK_DARK_BARGAIN_DOT                  = 110914,
-    SPELL_WARLOCK_DARK_REGENERATION                 = 108359,
-    SPELL_WARLOCK_DECIMATE_AURA                     = 108869,
-    SPELL_WARLOCK_DEMONIC_CALL                      = 114925,
-    SPELL_WARLOCK_DEMONIC_GATEWAY_PERIODIC_CHARGE   = 113901,
-    SPELL_WARLOCK_DEMONIC_GATEWAY_TELEPORT_GREEN    = 113896,
-    SPELL_WARLOCK_DEMONIC_GATEWAY_TELEPORT_PURPLE   = 120729,
-    SPELL_WARLOCK_DEMONIC_GATEWAY_SUMMON_GREEN      = 113886,
-    SPELL_WARLOCK_DEMONIC_LEAP_JUMP                 = 109163,
-    SPELL_WARLOCK_DARK_SOUL_MISERY                  = 113860,
-    SPELL_WARLOCK_DARK_SOUL_KNOWLEDGE               = 113861,
-    SPELL_WARLOCK_DARK_SOUL_INSTABILITY             = 113858,
-    SPELL_WARLOCK_DISRUPTED_NETHER                  = 114736,
-    SPELL_WARLOCK_DOOM                              = 603,
-    SPELL_WARLOCK_DRAIN_LIFE_HEAL                   = 89653,
-    SPELL_WARLOCK_FEAR                              = 5782,
-    SPELL_WARLOCK_FEAR_BUFF                         = 118699,
-    SPELL_WARLOCK_FEAR_EFFECT                       = 118699,
-    SPELL_WARLOCK_FIRE_AND_BRIMSTONE                = 108683,
-    SPELL_WARLOCK_GLYPH_OF_CONFLAGRATE              = 56235,
-    SPELL_WARLOCK_GLYPH_OF_FEAR                     = 56244,
-    SPELL_WARLOCK_GLYPH_OF_FEAR_EFFECT              = 130616,
-    SPELL_WARLOCK_GLYPH_OF_SOULWELL                 = 58094,
-    SPELL_WARLOCK_GLYPH_OF_SOULWELL_VISUAL          = 34145,
-    SPELL_WARLOCK_GRIMOIRE_OF_SACRIFICE             = 108503,
-    SPELL_WARLOCK_HARVEST_LIFE_HEAL                 = 125314,
-    SPELL_WARLOCK_IMMOLATE_FIRE_AND_BRIMSTONE       = 108686,
-    SPELL_WARLOCK_ITEM_S12_TIER_4                   = 131632,
-    SPELL_WARLOCK_KIL_JAEDENS_CUNNING_PASSIVE       = 108507,
-    SPELL_WARLOCK_METAMORPHOSIS                     = 103958,
-    SPELL_WARLOCK_MOLTEN_CORE                       = 122355,
-    SPELL_WARLOCK_MOLTEN_CORE_AURA                  = 122351,
-    SPELL_WARLOCK_NIGHTFALL                         = 108558,
-    SPELL_WARLOCK_PYROCLASM                         = 123686,
-    SPELL_WARLOCK_SEED_OF_CORRUPTION_DUMMY          = 86664,
-    SPELL_WARLOCK_SHADOWBURN_ENERGIZE               = 125882,
-    SPELL_WARLOCK_SHADOWFLAME                       = 47960,
-    SPELL_WARLOCK_SHIELD_OF_SHADOW                  = 115232,
-    SPELL_WARLOCK_SOULBURN_AURA                     = 74434,
-    SPELL_WARLOCK_SOULBURN_DEMONIC_CIRCLE_TELE      = 114794,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_1               = 93312,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_2               = 93313,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_3               = 104245,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_4               = 104249,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_5               = 104250,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_6               = 104251,
-    SPELL_WARLOCK_SOULBURN_OVERRIDE_7               = 114787,
-    SPELL_WARLOCK_SOUL_LEECH_AURA                   = 108370,
-    SPELL_WARLOCK_SOUL_LEECH_ABSORB                 = 108366,
-    SPELL_WARLOCK_SOUL_LINK_DUMMY_AURA              = 108446,
-    SPELL_WARLOCK_SOUL_SWAP_AURA                    = 86211,
-    SPELL_WARLOCK_SOUL_SWAP_VISUAL                  = 92795,
-    SPELL_WARLOCK_SPAWN_PURPLE_DEMONIC_GATEWAY      = 113890,
-    SPELL_WARLOCK_SUPPLANT_DEMONIC_COMMAND          = 119904,
-    SPELL_WARLOCK_THREATENING_PRESENCE              = 112042,
-    SPELL_WARLOCK_TWILIGHT_WARD_METAMORPHOSIS_S12   = 131624,
-    SPELL_WARLOCK_TWILIGHT_WARD_S12                 = 131623,
-    SPELL_WARLOCK_SOULWELL_CREATE_HEALTHSTONE       = 34130,
-    SPELL_WARLOCK_SHADOW_BOLT                       = 686,
-    SPELL_WARLOCK_SHADOW_BOLT_SHOULSHARD            = 194192,
-    SPELL_WARLOCK_HAND_OF_GULDAN_DAMAGE             = 86040,
-    SPELL_WARLOCK_HAND_OF_GULDAN_SUMMON             = 196282,
-    SPELL_WARLOCK_CALL_DREADSTALKERS_SUMMON         = 193331,
-    SPELL_WARLOCK_SHADOWY_INSPIRATION               = 196269,
-    SPELL_WARLOCK_SHADOWY_INSPIRATION_EFFECT        = 196606,
-    SPELL_WARLOCK_IMPENDING_DOOM                    = 196270,
-    SPELL_WARLOCK_IMPENDING_DOOM_SUMMON             = 196271,
-    SPELL_WARLOCK_IMPROVED_DREADSTALKERS            = 196272,
-    SPELL_WARLOCK_POWER_TRIP                        = 196605,
-    SPELL_WARLOCK_POWER_TRIP_ENERGIZE               = 216125,
-    SPELL_WARLOCK_HAVOC                             = 80240,
-    SPELL_WARLOCK_RAIN_OF_FIRE_DAMAGE               = 42223,
+    SPELL_WARLOCK_UNSTABLE_AFFLICTION_DISPEL        = 196364,
     SPELL_WARLOCK_WRITHE_IN_AGONY                   = 196102,
-    SPELL_WARLOCK_ABSOLUTE_CORRUPTION               = 196103,
-    SPELL_WARLOCK_CORRUPTION_DAMAGE                 = 146739,
-    SPELL_WARLOCK_BURNING_RUSH                      = 111400,
-    SPELL_WARLOCK_IMMOLATE_PROC                     = 193541,
-    SPELL_WARLOCK_IMMOLATE_DOT                      = 157736,
-    SPELL_WARLOCK_HEALTH_FUNNEL_HEAL                = 217979,
-    SPELL_WARLOCK_HAND_OF_DOOM                      = 196283,
-    SPELL_WARLOCK_COMMAND_DEMON_OVERRIDER           = 119904,
-    SPELL_WARLOCK_DOOM_SOUL_SHARD                   = 193318,
-    SPELL_WARLOCK_DEMONWRATH_AURA                   = 193440,
-    SPELL_WARLOCK_DEMONWRATH_SOULSHARD              = 194379,
-    SPELL_WARLOCK_DESTRUCTION_PASSIVE               = 137046,
-    SPELL_WARLOCK_DEMONSKIN                         = 219272,
-    SPELL_WARLOCK_SOUL_LEECH                        = 228974,
-    SPELL_WARLOCK_BACKDRAFT_AURA                    = 196406,
-    SPELL_WARLOCK_ERADICATION_DEBUFF                = 196414,
-    SPELL_WARLOCK_ERADICATION                       = 196412,
-    SPELL_WARLOCK_CHANNEL_DEMONFIRE_ACTIVATOR       = 228312,
-    SPELL_WARLOCK_CHANNEL_DEMONFIRE_DAMAGE          = 196448,
-    SPELL_WARLOCK_SOUL_CONDUIT_REFUND               = 215942,
-    SPELL_WARLOCK_ROARING_BLAZE                     = 205184,
-    SPELL_WARLOCK_CALL_DREADSTALKERS                = 104316,
-    SPELL_WARLOCK_IMPLOSION_JUMP                    = 205205,
-    SPELL_WARLOCK_IMPLOSION_DAMAGE                  = 196278,
-    SPELL_WARLOCK_GRIMOIRE_OF_SYNERGY_BUFF          = 171982,
-    SPELL_WARLOCK_EYE_LASER                         = 205231,
-    SPELL_WARLOCK_DEMONIC_CALLING_TRIGGER           = 205146,
-    SPELL_WARLOCK_DEMONBOLT                         = 157695,
-    SPELL_WARLOCK_DEMONIC_CALLING                   = 205145,
-    SPELL_WARLOCK_FEL_FIREBOLT                      = 104318,
-    SPELL_WARLOCK_PHANTOMATIC_SINGULARITY           = 205179,
-    SPELL_WARLOCK_PHANTOMATIC_SINGULARITY_DAMAGE    = 205246,
-    SPELL_WARLOCK_SUMMON_DREADSTALKER               = 193332,
 };
 
 enum WarlockSpellIcons
@@ -220,7 +218,9 @@ enum eGatewaySpells
 {
     PortalVisual = 113900,
     GatewayInteract = 113902,
-    CooldownMarker = 113942
+    CooldownMarker = 113942,
+	TeleportVisualGreen = 236762,
+    TeleportVisualPurple = 236671
 };
 
 enum eGatewayNpc
@@ -394,6 +394,7 @@ class spell_warl_immolate_dot : public AuraScript
         if (!caster)
             return;
 
+        caster->ModifyPower(POWER_SOUL_SHARDS, 10);
         caster->CastSpell(caster, SPELL_WARLOCK_CHANNEL_DEMONFIRE_ACTIVATOR, true);
     }
 
@@ -508,6 +509,8 @@ class spell_warl_conflagrate : public SpellScript
 
         if (caster->HasAura(SPELL_WARLOCK_BACKDRAFT_AURA))
             caster->CastSpell(caster, SPELL_WARLOCK_BACKDRAFT, true);
+
+        caster->ModifyPower(POWER_SOUL_SHARDS, 50);
 
         if (caster->HasAura(SPELL_WARLOCK_ROARING_BLAZE))
         {
@@ -740,45 +743,22 @@ class spell_warl_devour_magic : public SpellScript
 };
 
 // 48181 - Haunt
-/// Updated 4.3.4
-class spell_warl_haunt : public SpellScript
-{
-    PrepareSpellScript(spell_warl_haunt);
-
-    void HandleAfterHit()
-    {
-        if (Aura* aura = GetHitAura())
-            if (AuraEffect* aurEff = aura->GetEffect(EFFECT_1))
-                aurEff->SetAmount(CalculatePct(aurEff->GetAmount(), GetHitDamage()));
-    }
-
-    void Register() override
-    {
-        AfterHit += SpellHitFn(spell_warl_haunt::HandleAfterHit);
-    }
-};
-
 class aura_warl_haunt : public AuraScript
 {
     PrepareAuraScript(aura_warl_haunt);
 
-    bool Validate(SpellInfo const* /*spellInfo*/) override
+    void HandleRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
-        return ValidateSpellInfo({ SPELL_WARLOCK_HAUNT_HEAL });
-    }
+        Unit* caster = GetCaster();
+        if (!caster || GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_DEATH)
+            return;
 
-    void HandleRemove(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
-    {
-        if (Unit* caster = GetCaster())
-        {
-            int32 amount = aurEff->GetAmount();
-            GetTarget()->CastCustomSpell(caster, SPELL_WARLOCK_HAUNT_HEAL, &amount, NULL, NULL, true, NULL, aurEff, GetCasterGUID());
-        }
+        caster->GetSpellHistory()->ResetCooldown(SPELL_WARLOCK_HAUNT, true);
     }
 
     void Register() override
     {
-        OnEffectRemove += AuraEffectApplyFn(aura_warl_haunt::HandleRemove, EFFECT_1, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL_OR_REAPPLY_MASK);
+        OnEffectRemove += AuraEffectApplyFn(aura_warl_haunt::HandleRemove, EFFECT_1, SPELL_AURA_MOD_SCHOOL_MASK_DAMAGE_FROM_CASTER, AURA_EFFECT_HANDLE_REAL_OR_REAPPLY_MASK);
     }
 };
 
@@ -831,28 +811,94 @@ class spell_warl_healthstone_heal : public SpellScript
     }
 };
 
-// 27285 - Seed of Corruption
-/// Updated 4.3.4
+// 27243 - Seed of Corruption
 class spell_warl_seed_of_corruption : public SpellScript
 {
     PrepareSpellScript(spell_warl_seed_of_corruption);
 
-    void FilterTargets(std::list<WorldObject*>& targets)
+    void HandleBeforeCast()
     {
-        if (GetExplTargetUnit())
-            targets.remove(GetExplTargetUnit());
+        _maxAdditionalTargets = 0;
+
+        if (Aura* aura = GetCaster()->GetAura(SPELL_WARLOCK_SOW_THE_SEEDS))
+            _maxAdditionalTargets += aura->GetSpellEffectInfo(EFFECT_0)->BasePoints;
     }
 
-    void HandleHit(SpellEffIndex /*effIndex*/)
+    void CorrectTargets(std::list<WorldObject*>& targets)
     {
-        Unit* target = GetHitUnit();
-        GetCaster()->CastSpell(target, SPELL_WARLOCK_CORRUPTION, true);
+        std::list<WorldObject*> correctedTargets;
+        for (WorldObject* obj : targets)
+        {
+            if (obj == GetExplTargetUnit())
+            {
+                correctedTargets.push_back(obj);
+                continue;
+            }
+
+            if (_maxAdditionalTargets)
+            {
+                correctedTargets.push_back(obj);
+                --_maxAdditionalTargets;
+            }
+        }
+
+        targets = correctedTargets;
     }
 
     void Register() override
     {
-        OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_warl_seed_of_corruption::FilterTargets, EFFECT_0, TARGET_UNIT_DEST_AREA_ENEMY);
-        OnEffectHitTarget += SpellEffectFn(spell_warl_seed_of_corruption::HandleHit, EFFECT_0, SPELL_EFFECT_SCHOOL_DAMAGE);
+        BeforeCast += SpellCastFn(spell_warl_seed_of_corruption::HandleBeforeCast);
+        OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_warl_seed_of_corruption::CorrectTargets, EFFECT_1, TARGET_UNIT_DEST_AREA_ENEMY);
+        OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_warl_seed_of_corruption::CorrectTargets, EFFECT_2, TARGET_UNIT_DEST_AREA_ENEMY);
+    }
+
+private:
+    uint8 _maxAdditionalTargets;
+};
+
+// 27243 - Seed of Corruption
+class aura_warl_seed_of_corruption : public AuraScript
+{
+    PrepareAuraScript(aura_warl_seed_of_corruption);
+
+    bool Validate(SpellInfo const* /*spellInfo*/) override
+    {
+        return ValidateSpellInfo({ SPELL_WARLOCK_SEED_OF_CURRUPTION_DAMAGE });
+    }
+
+    void HandlePeriodic(AuraEffect const* aurEff)
+    {
+        aurEff->GetBase()->Remove(AURA_REMOVE_BY_EXPIRE);
+        if (Unit* caster = GetCaster())
+            caster->CastSpell(GetTarget()->GetPosition(), SPELL_WARLOCK_SEED_OF_CURRUPTION_DAMAGE, true);
+    }
+
+    void Register() override
+    {
+        OnEffectPeriodic += AuraEffectPeriodicFn(aura_warl_seed_of_corruption::HandlePeriodic, EFFECT_1, SPELL_AURA_PERIODIC_DAMAGE);
+    }
+};
+
+// 27285 - Seed of Corruption damages
+class spell_warl_seed_of_corruption_damage : public SpellScript
+{
+    PrepareSpellScript(spell_warl_seed_of_corruption_damage);
+
+    void HandleOnHit(SpellEffIndex /*effIndex*/)
+    {
+        if (Unit* target = GetHitUnit())
+        {
+            if (Aura* seedOfCorruption = target->GetAura(SPELL_WARLOCK_SEED_OF_CURRUPTION))
+            {
+                seedOfCorruption->Remove();
+                GetCaster()->CastSpell(target->GetPosition(), SPELL_WARLOCK_SEED_OF_CURRUPTION_DAMAGE, true);
+            }
+        }
+    }
+
+    void Register() override
+    {
+        OnEffectHitTarget += SpellEffectFn(spell_warl_seed_of_corruption_damage::HandleOnHit, EFFECT_0, SPELL_EFFECT_SCHOOL_DAMAGE);
     }
 };
 
@@ -1193,9 +1239,16 @@ class aura_warl_unstable_affliction : public AuraScript
         }
     }
 
+    void HandleRemove(const AuraEffect* /*aurEff*/, AuraEffectHandleModes /* mode */)
+    {
+        if (GetCaster() && GetTargetApplication()->GetRemoveMode() == AURA_REMOVE_BY_DEATH)
+            GetCaster()->ModifyPower(POWER_SOUL_SHARDS, 10);
+    }
+
     void Register() override
     {
         AfterDispel += AuraDispelFn(aura_warl_unstable_affliction::HandleDispel);
+        OnEffectRemove += AuraEffectApplyFn(aura_warl_unstable_affliction::HandleRemove, EFFECT_0, SPELL_AURA_PERIODIC_DAMAGE, AURA_EFFECT_HANDLE_REAL);
     }
 };
 
@@ -1392,6 +1445,11 @@ class spell_warl_chaos_bolt : public SpellScript
 {
     PrepareSpellScript(spell_warl_chaos_bolt);
 
+    void HandleCritChance(Unit* /*victim*/, float& chance)
+    {
+        chance = 100.f;
+    }
+
     void HandleOnHit(SpellEffIndex /*effIndex*/)
     {
         if (Unit* player = GetOriginalCaster())
@@ -1409,6 +1467,7 @@ class spell_warl_chaos_bolt : public SpellScript
 
     void Register() override
     {
+        OnCalcCritChance += SpellOnCalcCritChanceFn(spell_warl_chaos_bolt::HandleCritChance);
         OnEffectHitTarget += SpellEffectFn(spell_warl_chaos_bolt::HandleOnHit, EFFECT_0, SPELL_EFFECT_SCHOOL_DAMAGE);
     }
 };
@@ -1541,6 +1600,7 @@ class spell_warl_demonic_gateway : public SpellScript
     }
 };
 
+// Drain Soul - 198590
 class spell_warl_drain_soul : public SpellScriptLoader
 {
 public:
@@ -1552,12 +1612,8 @@ public:
 
         void HandleRemove(const AuraEffect* /*aurEff*/, AuraEffectHandleModes /* mode */)
         {
-            if (GetCaster())
-            {
-                AuraRemoveMode removeMode = GetTargetApplication()->GetRemoveMode();
-                if (removeMode == AURA_REMOVE_BY_DEATH)
-                    GetCaster()->SetPower(POWER_SOUL_SHARDS, GetCaster()->GetPower(POWER_SOUL_SHARDS) + 30);
-            }
+            if (GetCaster() && GetTargetApplication()->GetRemoveMode() == AURA_REMOVE_BY_DEATH)
+                GetCaster()->ModifyPower(POWER_SOUL_SHARDS, 10);
         }
 
         void HandleDummyPeriodic(AuraEffect const* /* auraEffect */)
@@ -1592,35 +1648,6 @@ public:
     AuraScript* GetAuraScript() const override
     {
         return new spell_warl_drain_soul_AuraScript();
-    }
-};
-
-class spell_warl_fire_and_brimstone : public SpellScriptLoader
-{
-public:
-    spell_warl_fire_and_brimstone() : SpellScriptLoader("spell_warl_fire_and_brimstone") { }
-
-    class spell_warl_fire_and_brimstone_SpellScript : public SpellScript
-    {
-        PrepareSpellScript(spell_warl_fire_and_brimstone_SpellScript);
-
-        void HandleOnHit()
-        {
-            if (Player* _player = GetCaster()->ToPlayer())
-                if (GetHitUnit())
-                    if (_player->HasAura(SPELL_WARLOCK_FIRE_AND_BRIMSTONE))
-                        _player->RemoveAura(SPELL_WARLOCK_FIRE_AND_BRIMSTONE);
-        }
-
-        void Register() override
-        {
-            OnHit += SpellHitFn(spell_warl_fire_and_brimstone_SpellScript::HandleOnHit);
-        }
-    };
-
-    SpellScript* GetSpellScript() const override
-    {
-        return new spell_warl_fire_and_brimstone_SpellScript();
     }
 };
 
@@ -1895,154 +1922,6 @@ public:
     AuraScript* GetAuraScript() const override
     {
         return new spell_warl_shadowburn_AuraScript();
-    }
-};
-
-class spell_warl_soulburn_override : public SpellScriptLoader
-{
-public:
-    spell_warl_soulburn_override() : SpellScriptLoader("spell_warl_soulburn_override") { }
-
-    class spell_warl_soulburn_override_AuraScript : public AuraScript
-    {
-        PrepareAuraScript(spell_warl_soulburn_override_AuraScript);
-
-        void OnApply(const AuraEffect* /*aurEff*/, AuraEffectHandleModes /*mode*/)
-        {
-            if (!GetCaster())
-                return;
-
-            if (Player* player = GetCaster()->ToPlayer())
-            {
-                // Overrides Seed of Corruption
-                player->CastSpell(player, SPELL_WARLOCK_SOULBURN_OVERRIDE_2, true);
-                // Overrides Demonic Circle : Teleport
-                player->CastSpell(player, SPELL_WARLOCK_SOULBURN_OVERRIDE_4, true);
-            }
-        }
-
-        void OnRemove(const AuraEffect* /*aurEff*/, AuraEffectHandleModes /*mode*/)
-        {
-            if (!GetCaster())
-                return;
-
-            if (Player* player = GetCaster()->ToPlayer())
-            {
-                // Overrides Seed of Corruption
-                player->RemoveAura(SPELL_WARLOCK_SOULBURN_OVERRIDE_2);
-                // Overrides Demonic Circle : Teleport
-                player->RemoveAura(SPELL_WARLOCK_SOULBURN_OVERRIDE_4);
-            }
-        }
-
-        void Register() override
-        {
-            OnEffectApply += AuraEffectApplyFn(spell_warl_soulburn_override_AuraScript::OnApply, EFFECT_0, SPELL_AURA_ADD_PCT_MODIFIER, AURA_EFFECT_HANDLE_REAL);
-            OnEffectRemove += AuraEffectRemoveFn(spell_warl_soulburn_override_AuraScript::OnRemove, EFFECT_0, SPELL_AURA_ADD_PCT_MODIFIER, AURA_EFFECT_HANDLE_REAL);
-        }
-    };
-
-    AuraScript* GetAuraScript() const override
-    {
-        return new spell_warl_soulburn_override_AuraScript();
-    }
-};
-
-class spell_warl_soulburn_remove : public SpellScriptLoader
-{
-public:
-    spell_warl_soulburn_remove() : SpellScriptLoader("spell_warl_soulburn_remove") { }
-
-    class spell_warl_soulburn_remove_SpellScript : public SpellScript
-    {
-        PrepareSpellScript(spell_warl_soulburn_remove_SpellScript);
-
-        void HandleOnHit()
-        {
-            if (Player* player = GetCaster()->ToPlayer())
-                if (player->HasAura(SPELL_WARLOCK_SOULBURN_AURA))
-                    player->RemoveAurasDueToSpell(SPELL_WARLOCK_SOULBURN_AURA);
-        }
-
-        void Register() override
-        {
-            OnHit += SpellHitFn(spell_warl_soulburn_remove_SpellScript::HandleOnHit);
-        }
-    };
-
-    SpellScript* GetSpellScript() const override
-    {
-        return new spell_warl_soulburn_remove_SpellScript();
-    }
-};
-
-class spell_warl_soulburn_seed_of_corruption : public SpellScriptLoader
-{
-public:
-    spell_warl_soulburn_seed_of_corruption() : SpellScriptLoader("spell_warl_soulburn_seed_of_corruption") { }
-
-    class spell_warl_soulburn_seed_of_corruption_SpellScript : public SpellScript
-    {
-        PrepareSpellScript(spell_warl_soulburn_seed_of_corruption_SpellScript);
-
-        void HandleOnHit()
-        {
-            if (Player* player = GetCaster()->ToPlayer())
-            {
-                player->CastSpell(player, SPELL_WARLOCK_SEED_OF_CORRUPTION_DUMMY, true);
-
-                if (player->HasAura(SPELL_WARLOCK_SOULBURN_AURA))
-                    player->RemoveAurasDueToSpell(SPELL_WARLOCK_SOULBURN_AURA);
-            }
-        }
-
-        void Register() override
-        {
-            OnHit += SpellHitFn(spell_warl_soulburn_seed_of_corruption_SpellScript::HandleOnHit);
-        }
-    };
-
-    SpellScript* GetSpellScript() const override
-    {
-        return new spell_warl_soulburn_seed_of_corruption_SpellScript();
-    }
-};
-
-class spell_warl_soulburn_seed_of_corruption_damage : public SpellScriptLoader
-{
-public:
-    spell_warl_soulburn_seed_of_corruption_damage() : SpellScriptLoader("spell_warl_soulburn_seed_of_corruption_damage") { }
-
-    class spell_warl_soulburn_seed_of_corruption_damage_SpellScript : public SpellScript
-    {
-        PrepareSpellScript(spell_warl_soulburn_seed_of_corruption_damage_SpellScript);
-
-        void FilterTargets(std::list<WorldObject*>& targets)
-        {
-            if (GetExplTargetUnit())
-                targets.remove(GetExplTargetUnit());
-        }
-
-        void HandleScript()
-        {
-            if (!GetCaster())
-                return;
-
-            // Remove Soul Burn aura
-            if (GetCaster()->HasAura(SPELL_WARLOCK_SEED_OF_CORRUPTION_DUMMY))
-                GetCaster()->RemoveAurasDueToSpell(SPELL_WARLOCK_SEED_OF_CORRUPTION_DUMMY);
-        }
-
-        void Register() override
-        {
-            OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_warl_soulburn_seed_of_corruption_damage_SpellScript::FilterTargets, EFFECT_0, TARGET_UNIT_DEST_AREA_ENEMY);
-            AfterHit += SpellHitFn(spell_warl_soulburn_seed_of_corruption_damage_SpellScript::HandleScript);
-        }
-    };
-
-    SpellScript* GetSpellScript() const override
-    {
-        return new spell_warl_soulburn_seed_of_corruption_damage_SpellScript();
     }
 };
 
@@ -2455,23 +2334,41 @@ class spell_npc_warl_demonic_gateway_purple : public CreatureScript
 {
 public:
     spell_npc_warl_demonic_gateway_purple() : CreatureScript("spell_npc_warl_demonic_gateway_purple") { }
-
+    enum eNpc
+    {
+        DELAY_TO_INTERACT = 50
+    };
     struct spell_npc_warl_demonic_gateway_purpleAI : public CreatureAI
     {
-        spell_npc_warl_demonic_gateway_purpleAI(Creature* p_Creature) : CreatureAI(p_Creature) { }
+        spell_npc_warl_demonic_gateway_purpleAI(Creature* p_Creature) : CreatureAI(p_Creature) { Init(); }
 
-        void UpdateAI(uint32 /*diff*/) override
+        EventMap m_events;
+        uint32 ready_to_jump;
+
+        void UpdateAI(uint32 diff) override
         {
+            m_events.Update(diff);
+            while (uint32 eventId = m_events.ExecuteEvent())
+            {
+                switch (eventId)
+                {
+                case DELAY_TO_INTERACT:
+                {
+                    ready_to_jump = 1;
+                    me->SetFlag(UNIT_FIELD_INTERACT_SPELLID, eGatewaySpells::GatewayInteract);
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_REMOVE_CLIENT_CONTROL);
+                    me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
+                    me->SetReactState(ReactStates::REACT_PASSIVE);
+                    break;
+                }
+                }
+            }
         }
-
-        void JustRespawned() override
+        void Init()
         {
             me->CastSpell(me, eGatewaySpells::PortalVisual, true);
-
-            me->SetFlag(UNIT_FIELD_INTERACT_SPELLID, eGatewaySpells::GatewayInteract);
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_REMOVE_CLIENT_CONTROL);
-            me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
-            me->SetReactState(ReactStates::REACT_PASSIVE);
+            ready_to_jump = 0;
+            m_events.ScheduleEvent(DELAY_TO_INTERACT, 500);
         }
 
         void OnSpellClick(Unit* p_Clicker, bool& /*result*/) override
@@ -2523,12 +2420,13 @@ public:
                 // Init dest coordinates
                 float x, y, z;
                 itr->GetPosition(x, y, z);
-
                 float speedXY;
                 float speedZ = 5;
 
                 speedXY = p_Clicker->GetExactDist2d(x, y) * 10.0f / speedZ;
+                p_Clicker->CastSpell(p_Clicker, eGatewaySpells::TeleportVisualPurple, true);
                 p_Clicker->GetMotionMaster()->MoveJump(x, y, z, p_Clicker->GetOrientation(), speedXY, speedZ);
+
                 break;
             }
         }
@@ -2545,24 +2443,41 @@ class spell_npc_warl_demonic_gateway_green : public CreatureScript
 {
 public:
     spell_npc_warl_demonic_gateway_green() : CreatureScript("spell_npc_warl_demonic_gateway_green") { }
-
+    enum eNpc
+    {
+        DELAY_TO_INTERACT = 50
+    };
     struct spell_npc_warl_demonic_gateway_greenAI : public CreatureAI
     {
-        spell_npc_warl_demonic_gateway_greenAI(Creature* p_Creature) : CreatureAI(p_Creature) { }
+        spell_npc_warl_demonic_gateway_greenAI(Creature* p_Creature) : CreatureAI(p_Creature) { Init(); }
 
-        void UpdateAI(uint32 /*diff*/) override
+        EventMap m_events;
+        uint32 ready_to_jump;
+
+        void UpdateAI(uint32 diff) override
         {
+            m_events.Update(diff);
+            while (uint32 eventId = m_events.ExecuteEvent())
+            {
+                switch (eventId)
+                {
+                case DELAY_TO_INTERACT:
+                {
+                    ready_to_jump = 1;
+                    me->SetFlag(UNIT_FIELD_INTERACT_SPELLID, eGatewaySpells::GatewayInteract);
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_REMOVE_CLIENT_CONTROL);
+                    me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
+                    me->SetReactState(ReactStates::REACT_PASSIVE);
+                    break;
+                }
+                }
+            }
         }
-
-        void JustRespawned() override
+        void Init()
         {
             me->CastSpell(me, eGatewaySpells::PortalVisual, true);
-
-            me->SetFlag(UNIT_FIELD_INTERACT_SPELLID, eGatewaySpells::GatewayInteract);
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_REMOVE_CLIENT_CONTROL);
-            me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
-            me->SetReactState(ReactStates::REACT_PASSIVE);
-
+            ready_to_jump = 0;
+            m_events.ScheduleEvent(DELAY_TO_INTERACT, 500);
         }
 
         void OnSpellClick(Unit* p_Clicker, bool& /*result*/) override
@@ -2613,12 +2528,13 @@ public:
                 // Init dest coordinates
                 float x, y, z;
                 itr->GetPosition(x, y, z);
-
                 float speedXY;
                 float speedZ = 5;
 
                 speedXY = p_Clicker->GetExactDist2d(x, y) * 10.0f / speedZ;
+                p_Clicker->CastSpell(p_Clicker, eGatewaySpells::TeleportVisualGreen, true);
                 p_Clicker->GetMotionMaster()->MoveJump(x, y, z, p_Clicker->GetOrientation(), speedXY, speedZ);
+
                 break;
             }
         }
@@ -3276,19 +3192,19 @@ public:
 
             switch (GetSpellInfo()->Id)
             {
-                case 111859: // Imp
+                case SPELL_WARLOCK_GRIMOIRE_IMP: // Imp
                     creature->CastSpell(caster, eServiceSpells::SPELL_IMP_SINGE_MAGIC, true);
                     break;
-                case 111895: // Voidwalker
+                case SPELL_WARLOCK_GRIMOIRE_VOIDWALKER: // Voidwalker
                     creature->CastSpell(target, eServiceSpells::SPELL_VOIDWALKER_SUFFERING, true);
                     break;
-                case 111896: // Succubus
+                case SPELL_WARLOCK_GRIMOIRE_SUCCUBUS: // Succubus
                     creature->CastSpell(target, eServiceSpells::SPELL_SUCCUBUS_SEDUCTION, true);
                     break;
-                case 111897: // Felhunter
+                case SPELL_WARLOCK_GRIMOIRE_FELHUNTER: // Felhunter
                     creature->CastSpell(target, eServiceSpells::SPELL_FELHUNTER_SPELL_LOCK, true);
                     break;
-                case 111898: // Felguard
+                case SPELL_WARLOCK_GRIMOIRE_FELGUARD: // Felguard
                     creature->CastSpell(target, eServiceSpells::SPELL_FELGUARD_AXE_TOSS, true);
                     break;
             }
@@ -3677,6 +3593,66 @@ class aura_warl_phantomatic_singularity : public AuraScript
     }
 };
 
+// Grimoire of Service - 108501
+class spell_warl_grimoire_of_service_aura : public AuraScript
+{
+    PrepareAuraScript(spell_warl_grimoire_of_service_aura);
+
+    void Handlearn(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
+    {
+        if (Player* player = GetCaster()->ToPlayer())
+        {
+            player->LearnSpell(SPELL_WARLOCK_GRIMOIRE_IMP, false);
+            player->LearnSpell(SPELL_WARLOCK_GRIMOIRE_VOIDWALKER, false);
+            player->LearnSpell(SPELL_WARLOCK_GRIMOIRE_SUCCUBUS, false);
+            player->LearnSpell(SPELL_WARLOCK_GRIMOIRE_FELHUNTER, false);
+            if (player->GetSpecializationId() == TALENT_SPEC_WARLOCK_DEMONOLOGY)
+                player->LearnSpell(SPELL_WARLOCK_GRIMOIRE_FELGUARD, false);
+        }
+    }
+    void HandleRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
+    {
+        if (Player* player = GetCaster()->ToPlayer())
+        {
+            player->RemoveSpell(SPELL_WARLOCK_GRIMOIRE_IMP, false, false);
+            player->RemoveSpell(SPELL_WARLOCK_GRIMOIRE_VOIDWALKER, false, false);
+            player->RemoveSpell(SPELL_WARLOCK_GRIMOIRE_SUCCUBUS, false, false);
+            player->RemoveSpell(SPELL_WARLOCK_GRIMOIRE_FELHUNTER, false, false);
+            player->RemoveSpell(SPELL_WARLOCK_GRIMOIRE_FELGUARD, false, false);
+        }
+    }
+    void Register() override
+    {
+        OnEffectApply += AuraEffectApplyFn(spell_warl_grimoire_of_service_aura::Handlearn, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+        OnEffectRemove += AuraEffectApplyFn(spell_warl_grimoire_of_service_aura::HandleRemove, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+    }
+};
+
+// Incinerate - 29722
+class spell_warl_incinerate : public SpellScript
+{
+    PrepareSpellScript(spell_warl_incinerate);
+
+    void HandleOnHitMainTarget(SpellEffIndex /*effIndex*/)
+    {
+        GetCaster()->ModifyPower(POWER_SOUL_SHARDS, 20);
+    }
+
+    void HandleOnHitTarget(SpellEffIndex /*effIndex*/)
+    {
+        if (Unit* target = GetHitUnit())
+            if (!GetCaster()->HasAura(SPELL_WARLOCK_FIRE_AND_BRIMSTONE))
+                if (target != GetExplTargetUnit())
+                    PreventHitDamage();
+    }
+
+    void Register() override
+    {
+        OnEffectHitTarget += SpellEffectFn(spell_warl_incinerate::HandleOnHitMainTarget, EFFECT_0, SPELL_EFFECT_DUMMY);
+        OnEffectHitTarget += SpellEffectFn(spell_warl_incinerate::HandleOnHitTarget, EFFECT_1, SPELL_EFFECT_SCHOOL_DAMAGE);
+    }
+};
+
 void AddSC_warlock_spell_scripts()
 {
     RegisterSpellScript(spell_warl_call_dreadstalker);
@@ -3703,11 +3679,10 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_drain_soul();
     new spell_warl_fear();
     new spell_warl_fear_buff();
-    new spell_warl_fire_and_brimstone();
     new spell_warl_glyph_of_soulwell();
     new spell_warl_hand_of_guldan();
     new spell_warl_hand_of_guldan_damage();
-    RegisterSpellAndAuraScriptPair(spell_warl_haunt, aura_warl_haunt);
+    RegisterAuraScript(aura_warl_haunt);
     new spell_warl_havoc();
     RegisterAuraScript(spell_warl_health_funnel);
     RegisterSpellScript(spell_warl_healthstone_heal);
@@ -3716,7 +3691,8 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_life_tap();
     new spell_warl_metamorphosis_cost();
     new spell_warl_molten_core_dot();
-    RegisterSpellScript(spell_warl_seed_of_corruption);
+    RegisterSpellAndAuraScriptPair(spell_warl_seed_of_corruption, aura_warl_seed_of_corruption);
+    RegisterSpellScript(spell_warl_seed_of_corruption_damage);
     RegisterSpellScript(spell_warl_shadow_bolt);
     new spell_warl_shadow_bulwark();
     RegisterAuraScript(spell_warl_shadow_ward);
@@ -3727,10 +3703,6 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_soul_swap_dot_marker();
     new spell_warl_soul_swap_exhale();
     new spell_warl_soul_swap_override();
-    new spell_warl_soulburn_override();
-    new spell_warl_soulburn_remove();
-    new spell_warl_soulburn_seed_of_corruption();
-    new spell_warl_soulburn_seed_of_corruption_damage();
     new spell_warl_soulshatter();
     new spell_warl_twilight_ward_s12();
     RegisterSpellScript(spell_warl_unstable_affliction);
@@ -3759,6 +3731,8 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_chaotic_energies();
     new spell_warl_eradication();
     RegisterAuraScript(aura_warl_phantomatic_singularity);
+    RegisterAuraScript(spell_warl_grimoire_of_service_aura);
+    RegisterSpellScript(spell_warl_incinerate);
 
     ///AreaTrigger scripts
     RegisterAreaTriggerAI(at_warl_rain_of_fire);

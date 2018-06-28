@@ -94,7 +94,7 @@ void AddSC_boss_warlord_parjesh();
 // Halls of Valor
 void AddSC_instance_halls_of_valor();
 void AddSC_halls_of_valor();
-void AddSC_boss_odyn();
+void AddSC_boss_odyn_hov();
 void AddSC_boss_hyrja();
 void AddSC_boss_hymdall();
 void AddSC_boss_godking_skovald();
@@ -142,6 +142,14 @@ void AddSC_talixae_flamewreath();
 void AddSC_boss_advisor_melandrus();
 void AddSC_court_of_stars();
 void AddSC_instance_court_of_stars();
+
+// Seat of Triumvirate
+void AddSC_boss_zuraal_the_ascended();
+void AddSC_boss_saprish();
+void AddSC_boss_viceroy_nezhar();
+void AddSC_boss_lura();
+void AddSC_seat_of_triumvirate();
+void AddSC_instance_seat_of_triumvirate();
 
 // Emerald Nightmare
 void AddSC_nythendra();
@@ -247,7 +255,7 @@ void AddBrokenIslesScripts()
     // Halls of Valor
     AddSC_instance_halls_of_valor();
     AddSC_halls_of_valor();
-    AddSC_boss_odyn();
+    AddSC_boss_odyn_hov();
     AddSC_boss_hyrja();
     AddSC_boss_hymdall();
     AddSC_boss_godking_skovald();
@@ -295,6 +303,14 @@ void AddBrokenIslesScripts()
     AddSC_boss_advisor_melandrus();
     AddSC_court_of_stars();
     AddSC_instance_court_of_stars();
+
+    // Seat of Triumvirate
+    AddSC_boss_zuraal_the_ascended();
+    AddSC_boss_saprish();
+    AddSC_boss_viceroy_nezhar();
+    AddSC_boss_lura();
+    AddSC_seat_of_triumvirate();
+    AddSC_instance_seat_of_triumvirate();
 
     // Emerald Nightmare
     AddSC_nythendra();

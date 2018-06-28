@@ -23,18 +23,30 @@
 #include "ScriptedCreature.h"
 #include "ScriptMgr.h"
 
-/*DoorData const doorData[] =
+DoorData const doorData[] =
 {
-};*/
+    { GOB_NYTHENDRA_ENTRANCE_1,     DATA_NYTHENDRA,     DOOR_TYPE_ROOM  },
+    { GOB_NYTHENDRA_ENTRANCE_2,     DATA_NYTHENDRA,     DOOR_TYPE_ROOM  },
+};
 
 struct instance_emerald_nightmare : public InstanceScript
 {
-    instance_emerald_nightmare(Map* map) : InstanceScript(map) { }
+    instance_emerald_nightmare(InstanceMap* map) : InstanceScript(map) { }
 
     void Initialize() override
     {
         SetBossNumber(DATA_MAX_ENCOUNTERS);
-        //LoadDoorData(doorData);
+        LoadDoorData(doorData);
+    }
+
+    void OnCreatureCreate(Creature* creature) override
+    {
+        InstanceScript::OnCreatureCreate(creature);
+
+        if (instance->IsHeroic())
+            creature->SetBaseHealth(creature->GetMaxHealth() * 2.f);
+        if (instance->IsMythic())
+            creature->SetBaseHealth(creature->GetMaxHealth() * 1.33f);
     }
 };
 

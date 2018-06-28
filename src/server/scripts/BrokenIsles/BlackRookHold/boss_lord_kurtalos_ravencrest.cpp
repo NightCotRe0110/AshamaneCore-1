@@ -27,7 +27,7 @@ enum Spells
 
     // Kurtalos
     SPELL_UNERRING_SHEAR            = 198635,
-    
+
     NPC_WHIRLING_BLADE              = 100861,
     SPELL_WHIRLING_BLADE            = 198641,
     SPELL_WHIRLING_BLADE_DAMAGE     = 198781,
@@ -397,8 +397,11 @@ struct npc_latosius : public ScriptedAI
                     TeleportToCenter();
                     me->RemoveAurasDueToSpell(SPELL_DREADLORDS_GUILE);
                     me->ClearUnitState(UNIT_STATE_CANNOT_TURN);
-                    me->GetMotionMaster()->MoveChase(me->GetVictim());
-                    me->SetTarget(me->GetVictim()->GetGUID());
+                    if (me->GetVictim())
+                    {
+                        me->SetTarget(me->GetVictim()->GetGUID());
+                        me->GetMotionMaster()->MoveChase(me->GetVictim());
+                    }
                     return;
                 }
 

@@ -451,10 +451,10 @@ BossAI::BossAI(Creature* creature, uint32 bossId) : ScriptedAI(creature),
 {
     if (instance)
         SetBoundary(instance->GetBossBoundary(bossId));
-    me->GetScheduler().SetValidator([this]
+    /*me->GetScheduler().SetValidator([this]
     {
         return !me->HasUnitState(UNIT_STATE_CASTING);
-    });
+    });*/
 }
 
 void BossAI::_Reset()
@@ -608,6 +608,7 @@ void WorldBossAI::_JustDied()
 
 void WorldBossAI::_EnterCombat()
 {
+    ScheduleTasks();
     Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 0.0f, true);
     if (target)
         AttackStart(target);

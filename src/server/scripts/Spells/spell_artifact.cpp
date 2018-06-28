@@ -54,6 +54,8 @@ enum SpellIds
     SPELL_SHAMAN_HEALING_STREAM_TOTEM               = 5394,
     SPELL_SHAMAN_REINCARNATION                      = 20608,
     SPELL_SHAMAN_SERVANT_OF_THE_QUEEN               = 207357,
+    SPELL_SHAMAN_FURY_OF_THE_STORMS                 = 191717,
+    SPELL_SHAMAN_SUMMON_LIGHTHING_ELEMENTAL         = 191716,
     SPELL_WARLOCK_DEADWIND_HARVERST                 = 216708,
     SPELL_WARLOCK_TORMENTED_SOULS                   = 216695,
     SPELL_WARLOCK_THALKIELS_CONSUMPTION_DAMAGE      = 211715,
@@ -619,7 +621,12 @@ class spell_arti_pri_call_of_the_void : public AuraScript
 
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
-        return ValidateSpellInfo({ SPELL_PRIEST_CALL_OF_THE_VOID, SPELL_PRIEST_CALL_OF_THE_VOID_SUMMON });
+        return ValidateSpellInfo({ SPELL_PRIEST_MIND_FLAY, SPELL_PRIEST_CALL_OF_THE_VOID, SPELL_PRIEST_CALL_OF_THE_VOID_SUMMON });
+    }
+
+    bool CheckProc(ProcEventInfo& eventInfo)
+    {
+        return eventInfo.GetSpellInfo() && eventInfo.GetSpellInfo()->Id == SPELL_PRIEST_MIND_FLAY;
     }
 
     void HandleEffectProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
@@ -630,6 +637,7 @@ class spell_arti_pri_call_of_the_void : public AuraScript
 
     void Register() override
     {
+        DoCheckProc += AuraCheckProcFn(spell_arti_pri_call_of_the_void::CheckProc);
         OnEffectProc += AuraEffectProcFn(spell_arti_pri_call_of_the_void::HandleEffectProc, EFFECT_0, SPELL_AURA_DUMMY);
     }
 };
@@ -641,26 +649,31 @@ struct npc_arti_priest_void_tendril : public Scripted_NoMovementAI
 
     void IsSummonedBy(Unit* summoner) override
     {
-        _targetGuid = summoner->GetTarget();
-        if (Unit* target = ObjectAccessor::GetUnit(*me, _targetGuid))
+        auto channelTargets = summoner->GetChannelObjects();
+
+        if (channelTargets.size() != 1)
+        {
+            me->DisappearAndDie();
+            return;
+        }
+
+        ObjectGuid targetGuid = *(channelTargets.begin());
+        if (Unit* target = ObjectAccessor::GetUnit(*me, targetGuid))
         {
             AttackStart(target);
-            me->GetScheduler().Schedule(250ms, [this](TaskContext context)
+            me->GetScheduler().Schedule(250ms, [this, targetGuid](TaskContext context)
             {
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
                 if (Unit* owner = me->GetOwner())
-                    if (Unit* target = ObjectAccessor::GetUnit(*me, _targetGuid))
+                    if (Unit* target = ObjectAccessor::GetUnit(*me, targetGuid))
                         me->CastCustomSpell(SPELL_PRIEST_MIND_FLAY, SPELLVALUE_BASE_POINT0, owner->GetTotalSpellPowerValue(SPELL_SCHOOL_MASK_SHADOW, false), target);
 
                 context.Repeat();
             });
         }
     }
-
-private:
-    ObjectGuid _targetGuid;
 };
 
 // 200653  - Tyr's Deliverance
@@ -682,6 +695,23 @@ class spell_arti_pal_tyr_deliverance : public SpellScript
     void Register() override
     {
         OnEffectHitTarget += SpellEffectFn(spell_arti_pal_tyr_deliverance::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
+    }
+};
+
+// 205495 - Stormkeeper
+class aura_artifact_shaman_stormkeeper : public AuraScript
+{
+    PrepareAuraScript(aura_artifact_shaman_stormkeeper);
+
+    void AfterApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
+    {
+        if (GetCaster()->HasAura(SPELL_SHAMAN_FURY_OF_THE_STORMS))
+            GetCaster()->CastSpell(GetCaster(), SPELL_SHAMAN_SUMMON_LIGHTHING_ELEMENTAL, true);
+    }
+
+    void Register() override
+    {
+        AfterEffectApply += AuraEffectApplyFn(aura_artifact_shaman_stormkeeper::AfterApply, EFFECT_0, SPELL_AURA_ADD_PCT_MODIFIER, AURA_EFFECT_HANDLE_REAL);
     }
 };
 
@@ -715,4 +745,6 @@ void AddSC_artifact_spell_scripts()
     RegisterCreatureAI(npc_arti_priest_void_tendril);
 
     RegisterSpellScript(spell_arti_pal_tyr_deliverance);
+    
+    RegisterAuraScript(aura_artifact_shaman_stormkeeper);
 }

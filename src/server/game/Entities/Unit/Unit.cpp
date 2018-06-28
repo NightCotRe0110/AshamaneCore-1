@@ -23,6 +23,7 @@
 #include "BattlegroundPackets.h"
 #include "BattlegroundScore.h"
 #include "CellImpl.h"
+#include "ChallengeModeMgr.h"
 #include "ChatPackets.h"
 #include "ChatTextBuilder.h"
 #include "CombatLogPackets.h"
@@ -707,6 +708,7 @@ bool Unit::HasBreakableByDamageCrowdControlAura(Unit* excludeCasterChannel) cons
 
     return (   HasBreakableByDamageAuraType(SPELL_AURA_MOD_CONFUSE, excludeAura)
             || HasBreakableByDamageAuraType(SPELL_AURA_MOD_FEAR, excludeAura)
+            || HasBreakableByDamageAuraType(SPELL_AURA_MOD_FEAR_2, excludeAura)
             || HasBreakableByDamageAuraType(SPELL_AURA_MOD_STUN, excludeAura)
             || HasBreakableByDamageAuraType(SPELL_AURA_MOD_ROOT, excludeAura)
             || HasBreakableByDamageAuraType(SPELL_AURA_MOD_ROOT_2, excludeAura)
@@ -740,12 +742,15 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
     }
 
     if (IsAIEnabled)
+    {
         GetAI()->DamageDealt(victim, damage, damagetype);
+        GetAI()->DamageDealt(victim, damage, damagetype, spellProto);
+    }
 
     // Hook for OnDamage Event
     sScriptMgr->OnDamage(this, victim, damage);
 
-    if (victim->GetTypeId() == TYPEID_PLAYER && this != victim)
+    if (victim->IsPlayer() && this != victim)
     {
         // Signal to pets that their owner was attacked - except when DOT.
         if (damagetype != DOT)
@@ -763,7 +768,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
     }
 
     // Signal the pet it was attacked so the AI can respond if needed
-    if (victim->GetTypeId() == TYPEID_UNIT && this != victim && victim->IsPet() && victim->IsAlive())
+    if (victim->IsCreature() && this != victim && victim->IsPet() && victim->IsAlive())
         victim->ToPet()->AI()->AttackedBy(this);
 
     if (damagetype != NODAMAGE)
@@ -857,7 +862,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
         }
     }
 
-    if (GetTypeId() == TYPEID_PLAYER && this != victim)
+    if (IsPlayer() && this != victim)
     {
         Player* killer = ToPlayer();
 
@@ -4308,6 +4313,21 @@ void Unit::_ApplyAllAuraStatMods()
 {
     for (AuraApplicationMap::iterator i = m_appliedAuras.begin(); i != m_appliedAuras.end(); ++i)
         (*i).second->GetBase()->HandleAllEffects(i->second, AURA_EFFECT_HANDLE_STAT, true);
+}
+
+Player::AuraEffectList const Unit::GetAuraEffectsByTypes(std::initializer_list<AuraType> types) const
+{
+    Player::AuraEffectList returnAuraEffectList;
+
+    for (AuraType type : types)
+    {
+        Player::AuraEffectList typeAuraEffectList = GetAuraEffectsByType(type);
+
+        if (!typeAuraEffectList.empty())
+            returnAuraEffectList.insert(returnAuraEffectList.end(), typeAuraEffectList.begin(), typeAuraEffectList.end());
+    }
+
+    return returnAuraEffectList;
 }
 
 AuraEffect* Unit::GetAuraEffect(uint32 spellId, uint8 effIndex, ObjectGuid caster) const
@@ -8729,7 +8749,12 @@ void Unit::setDeathState(DeathState s)
 
         // players in instance don't have ZoneScript, but they have InstanceScript
         if (ZoneScript* zoneScript = GetZoneScript() ? GetZoneScript() : GetInstanceScript())
+        {
             zoneScript->OnUnitDeath(this);
+
+            if (IsPlayer())
+                zoneScript->OnPlayerDeath(ToPlayer());
+        }
     }
     else if (s == JUST_RESPAWNED)
         RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SKINNABLE); // clear skinnable for creature and player (at battleground)
@@ -9764,12 +9789,12 @@ void Unit::SetMaxPower(Powers power, int32 val)
 
 void Unit::CheckPowerProc(Powers power, int32 oldVal, int32 newVal)
 {
-    AuraEffectList effects       = GetAuraEffectsByType(SPELL_AURA_TRIGGER_SPELL_ON_POWER_PCT);
-    AuraEffectList effectsAmount = GetAuraEffectsByType(SPELL_AURA_TRIGGER_SPELL_ON_POWER_AMOUNT);
+    CheckPowerProc(power, oldVal, newVal, GetAuraEffectsByType(SPELL_AURA_TRIGGER_SPELL_ON_POWER_PCT));
+    CheckPowerProc(power, oldVal, newVal, GetAuraEffectsByType(SPELL_AURA_TRIGGER_SPELL_ON_POWER_AMOUNT));
+}
 
-    if (effectsAmount.size() != 0)
-        effects.merge(effectsAmount);
-
+void Unit::CheckPowerProc(Powers power, int32 oldVal, int32 newVal, AuraEffectList effects)
+{
     for (AuraEffect* effect : effects)
     {
         if (effect->GetMiscValue() == power)
@@ -10038,6 +10063,7 @@ void CharmInfo::InitPossessCreateSpells()
             case 24783: // Trained Rock Falcon
             case 27664: // Crashin' Thrashin' Racer
             case 40281: // Crashin' Thrashin' Racer
+            case 28511: // Eye of Acherus
                 break;
             default:
                 InitEmptyActionBar();
@@ -11178,90 +11204,105 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
     Player* player = GetCharmerOrOwnerPlayerOrPlayerItself();
     Creature* creature = victim->ToCreature();
 
-    bool isRewardAllowed = true;
+    bool isXpRewardAllowed = true;
+    bool isLootRewardAllowed = true;
+
     if (creature)
     {
-        isRewardAllowed = creature->IsDamageEnoughForLootingAndReward();
-        if (!isRewardAllowed)
+        isXpRewardAllowed = isLootRewardAllowed = creature->IsDamageEnoughForLootingAndReward();
+
+        if (InstanceScript* instance = creature->GetInstanceScript())
+            if (instance->IsChallengeModeStarted())
+                isLootRewardAllowed = false;
+
+        if (!isLootRewardAllowed)
             creature->SetLootRecipient(NULL);
     }
 
-    if (isRewardAllowed && creature && creature->GetLootRecipient())
+    if (isLootRewardAllowed && creature && creature->GetLootRecipient())
         player = creature->GetLootRecipient();
 
     // Exploit fix
     if (creature && creature->IsPet() && creature->GetOwnerGUID().IsPlayer())
-        isRewardAllowed = false;
+        isXpRewardAllowed = isLootRewardAllowed = false;
 
-    // Reward player, his pets, and group/raid members
-    // call kill spell proc event (before real die and combat stop to triggering auras removed at death/combat stop)
-    if (isRewardAllowed && player && player != victim)
+    if (player && player != victim)
     {
-        WorldPackets::Party::PartyKillLog partyKillLog;
-        partyKillLog.Player = player->GetGUID();
-        partyKillLog.Victim = victim->GetGUID();
-
-        Player* looter = player;
         Group* group = player->GetGroup();
-        bool hasLooterGuid = false;
 
-        if (group)
+        if (isXpRewardAllowed)
         {
-            group->BroadcastPacket(partyKillLog.Write(), group->GetMemberGroup(player->GetGUID()) != 0);
+            WorldPackets::Party::PartyKillLog partyKillLog;
+            partyKillLog.Player = player->GetGUID();
+            partyKillLog.Victim = victim->GetGUID();
 
-            if (creature)
-            {
-                group->UpdateLooterGuid(creature, true);
-                if (!group->GetLooterGuid().IsEmpty())
-                {
-                    looter = ObjectAccessor::FindPlayer(group->GetLooterGuid());
-                    if (looter)
-                    {
-                        hasLooterGuid = true;
-                        creature->SetLootRecipient(looter);   // update creature loot recipient to the allowed looter.
-                    }
-                }
-            }
-        }
-        else
-        {
-            player->SendDirectMessage(partyKillLog.Write());
+            if (group)
+                group->BroadcastPacket(partyKillLog.Write(), group->GetMemberGroup(player->GetGUID()) != 0);
+            else
+                player->SendDirectMessage(partyKillLog.Write());
 
-            if (creature)
-            {
-                WorldPackets::Loot::LootList lootList;
-                lootList.Owner = creature->GetGUID();
-                lootList.LootObj = creature->loot.GetGUID();
-
-                player->SendMessageToSet(lootList.Write(), true);
-            }
+            player->RewardPlayerAndGroupAtKill(victim, false);
         }
 
-        // Generate loot before updating looter
-        if (creature)
+        // Reward player, his pets, and group/raid members
+        // call kill spell proc event (before real die and combat stop to triggering auras removed at death/combat stop)
+        if (isLootRewardAllowed)
         {
-            Loot* loot = &creature->loot;
-
-            loot->clear();
-            if (uint32 lootid = creature->GetCreatureTemplate()->lootid)
-                loot->FillLoot(lootid, LootTemplates_Creature, looter, false, false, creature->GetLootMode());
-
-            loot->generateMoneyLoot(creature->GetCreatureTemplate()->mingold, creature->GetCreatureTemplate()->maxgold);
+            Player* looter = player;
+            bool hasLooterGuid = false;
 
             if (group)
             {
-                if (hasLooterGuid)
-                    group->SendLooter(creature, looter);
-                else
-                    group->SendLooter(creature, NULL);
+                if (creature)
+                {
+                    group->UpdateLooterGuid(creature, true);
+                    if (!group->GetLooterGuid().IsEmpty())
+                    {
+                        looter = ObjectAccessor::FindPlayer(group->GetLooterGuid());
+                        if (looter)
+                        {
+                            hasLooterGuid = true;
+                            creature->SetLootRecipient(looter);   // update creature loot recipient to the allowed looter.
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (creature)
+                {
+                    WorldPackets::Loot::LootList lootList;
+                    lootList.Owner = creature->GetGUID();
+                    lootList.LootObj = creature->loot.GetGUID();
 
-                // Update round robin looter only if the creature had loot
-                if (!loot->empty())
-                    group->UpdateLooterGuid(creature);
+                    player->SendMessageToSet(lootList.Write(), true);
+                }
+            }
+
+            // Generate loot before updating looter
+            if (creature)
+            {
+                Loot* loot = &creature->loot;
+
+                loot->clear();
+                if (uint32 lootid = creature->GetCreatureTemplate()->lootid)
+                    loot->FillLoot(lootid, LootTemplates_Creature, looter, false, false, creature->GetLootMode());
+
+                loot->generateMoneyLoot(creature->GetCreatureTemplate()->mingold, creature->GetCreatureTemplate()->maxgold);
+
+                if (group)
+                {
+                    if (hasLooterGuid)
+                        group->SendLooter(creature, looter);
+                    else
+                        group->SendLooter(creature, NULL);
+
+                    // Update round robin looter only if the creature had loot
+                    if (!loot->empty())
+                        group->UpdateLooterGuid(creature);
+                }
             }
         }
-
-        player->RewardPlayerAndGroupAtKill(victim, false);
     }
 
     // Do KILL and KILLED procs. KILL proc is called only for the unit who landed the killing blow (and its owner - for pets and totems) regardless of who tapped the victim
@@ -11316,7 +11357,7 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
             SendDurabilityLoss(plrVictim, loss);
         }
         // Call KilledUnit for creatures
-        if (GetTypeId() == TYPEID_UNIT && IsAIEnabled)
+        if (IsCreature() && IsAIEnabled)
             ToCreature()->AI()->KilledUnit(victim);
 
         // last damage from non duel opponent or opponent controlled creature
@@ -11412,11 +11453,11 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
     }
 
     // achievement stuff
-    if (victim->GetTypeId() == TYPEID_PLAYER)
+    if (victim->IsPlayer())
     {
-        if (GetTypeId() == TYPEID_UNIT)
+        if (IsCreature())
             victim->ToPlayer()->UpdateCriteria(CRITERIA_TYPE_KILLED_BY_CREATURE, GetEntry());
-        else if (GetTypeId() == TYPEID_PLAYER && victim != this)
+        else if (IsPlayer() && victim != this)
             victim->ToPlayer()->UpdateCriteria(CRITERIA_TYPE_KILLED_BY_PLAYER, 1, ToPlayer()->GetTeam());
     }
 
@@ -11510,7 +11551,7 @@ void Unit::SetControlled(bool apply, UnitState state)
                 SetConfused(false);
                 break;
             case UNIT_STATE_FLEEING:
-                if (HasAuraType(SPELL_AURA_MOD_FEAR))
+                if (HasAuraType(SPELL_AURA_MOD_FEAR) || HasAuraType(SPELL_AURA_MOD_FEAR_2))
                     return;
 
                 SetFeared(false);
@@ -11531,7 +11572,7 @@ void Unit::SetControlled(bool apply, UnitState state)
 
             if (HasAuraType(SPELL_AURA_MOD_CONFUSE))
                 SetConfused(true);
-            else if (HasAuraType(SPELL_AURA_MOD_FEAR))
+            else if (HasAuraType(SPELL_AURA_MOD_FEAR) || HasAuraType(SPELL_AURA_MOD_FEAR_2))
                 SetFeared(true);
         }
     }
@@ -11618,7 +11659,7 @@ void Unit::SetFeared(bool apply)
         SetTarget(ObjectGuid::Empty);
 
         Unit* caster = NULL;
-        Unit::AuraEffectList const& fearAuras = GetAuraEffectsByType(SPELL_AURA_MOD_FEAR);
+        Unit::AuraEffectList const& fearAuras = GetAuraEffectsByTypes({ SPELL_AURA_MOD_FEAR, SPELL_AURA_MOD_FEAR_2 });
         if (!fearAuras.empty())
             caster = ObjectAccessor::GetUnit(*this, fearAuras.front()->GetCasterGUID());
         if (!caster)
@@ -14405,17 +14446,12 @@ void Unit::Whisper(uint32 textId, Player* target, bool isBossWhisper /*= false*/
 
 SpellInfo const* Unit::GetCastSpellInfo(SpellInfo const* spellInfo) const
 {
-    Unit::AuraEffectList swaps = GetAuraEffectsByType(SPELL_AURA_OVERRIDE_ACTIONBAR_SPELLS);
-    Unit::AuraEffectList const& swaps2 = GetAuraEffectsByType(SPELL_AURA_OVERRIDE_ACTIONBAR_SPELLS_TRIGGERED);
-    if (!swaps2.empty())
-        swaps.insert(swaps.end(), swaps2.begin(), swaps2.end());
+    Unit::AuraEffectList swaps = GetAuraEffectsByTypes({ SPELL_AURA_OVERRIDE_ACTIONBAR_SPELLS, SPELL_AURA_OVERRIDE_ACTIONBAR_SPELLS_TRIGGERED });
 
     for (AuraEffect const* auraEffect : swaps)
-    {
         if (uint32(auraEffect->GetMiscValue()) == spellInfo->Id || auraEffect->IsAffectingSpell(spellInfo))
             if (SpellInfo const* newInfo = sSpellMgr->GetSpellInfo(auraEffect->GetAmount()))
                 return newInfo;
-    }
 
     return spellInfo;
 }

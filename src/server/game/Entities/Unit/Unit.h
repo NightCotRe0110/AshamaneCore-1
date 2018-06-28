@@ -1088,6 +1088,7 @@ class TC_GAME_API Unit : public WorldObject
         void SetPower(Powers power, int32 val);
         void SetMaxPower(Powers power, int32 val);
         void CheckPowerProc(Powers power, int32 oldVal, int32 newVal);
+        void CheckPowerProc(Powers power, int32 oldVal, int32 newVal, AuraEffectList effects);
         inline void SetFullPower(Powers power) { SetPower(power, GetMaxPower(power)); }
         // returns the change in power
         int32 ModifyPower(Powers power, int32 val);
@@ -1238,7 +1239,7 @@ class TC_GAME_API Unit : public WorldObject
 
         bool HasStealthAura()      const { return HasAuraType(SPELL_AURA_MOD_STEALTH); }
         bool HasInvisibilityAura() const { return HasAuraType(SPELL_AURA_MOD_INVISIBILITY); }
-        bool isFeared()  const { return HasAuraType(SPELL_AURA_MOD_FEAR); }
+        bool isFeared()  const { return HasAuraType(SPELL_AURA_MOD_FEAR) || HasAuraType(SPELL_AURA_MOD_FEAR_2); }
         bool IsPolymorphed() const;
 
         bool isFrozen() const;
@@ -1504,6 +1505,7 @@ class TC_GAME_API Unit : public WorldObject
         void _ApplyAllAuraStatMods();
 
         AuraEffectList const& GetAuraEffectsByType(AuraType type) const { return m_modAuras[type]; }
+        AuraEffectList const GetAuraEffectsByTypes(std::initializer_list<AuraType> types) const;
         AuraList      & GetSingleCastAuras()       { return m_scAuras; }
         AuraList const& GetSingleCastAuras() const { return m_scAuras; }
 

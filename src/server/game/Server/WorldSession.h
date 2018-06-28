@@ -190,6 +190,15 @@ namespace WorldPackets
         class CalendarComplain;
     }
 
+    namespace ChallengeMode
+    {
+        class StartRequest;
+        class ChangePlayerDifficultyResult;
+        class Start;
+        class Reset;
+        class UpdateDeathCount;
+    }
+
     namespace Character
     {
         struct CharacterCreateInfo;
@@ -466,6 +475,8 @@ namespace WorldPackets
         class ReclaimCorpse;
         class RepopRequest;
         class RequestCemeteryList;
+        class ResearchHistory;
+        class ResearchSetupHistory;
         class ResurrectResponse;
         class StandStateChange;
         class UITimeRequest;
@@ -489,6 +500,8 @@ namespace WorldPackets
         class AdventureJournalOpenQuest;
         class FactionSelect;
         class AdventureJournalStartQuest;
+        class StartTimer;
+        class StartElapsedTimer;
     }
 
     namespace Movement
@@ -1731,6 +1744,9 @@ class TC_GAME_API WorldSession
         void HandleSaveCUFProfiles(WorldPackets::Misc::SaveCUFProfiles& packet);
         void SendLoadCUFProfiles();
 
+        // Archaeology
+        void HandleResearchHistory(WorldPackets::Misc::ResearchHistory& resHistory);
+
         // Garrison
         void HandleGetGarrisonInfo(WorldPackets::Garrison::GetGarrisonInfo& getGarrisonInfo);
         void HandleGarrisonPurchaseBuilding(WorldPackets::Garrison::GarrisonPurchaseBuilding& garrisonPurchaseBuilding);
@@ -1783,6 +1799,9 @@ class TC_GAME_API WorldSession
 
         // Honor
         void HandlePvpPrestigeRankUp(WorldPackets::Misc::PvpPrestigeRankUp& /*pvpPrestigeRankUp*/);
+
+        // Challenge Modes
+        void HandleChallengeModeStart(WorldPackets::ChallengeMode::StartRequest& /*start*/);
 
         union ConnectToKey
         {

@@ -29,14 +29,14 @@ DoorData const doorData[] =
 
     { GOB_DOOR_ODYN_PASSAGE,        DATA_HYRJA,             DOOR_TYPE_PASSAGE   },
     { GOB_DOOR_ODYN_BRIDGE,         DATA_HYRJA,             DOOR_TYPE_PASSAGE   },
-    
+
     { GOB_DOOR_ODYN_ROOM,           DATA_GODKING_SKOVALD,   DOOR_TYPE_ROOM      },
     { GOB_DOOR_ODYN_ROOM,           DATA_ODYN,              DOOR_TYPE_ROOM      },
 };
 
 struct instance_halls_of_valor : public InstanceScript
 {
-    instance_halls_of_valor(Map* map) : InstanceScript(map) { }
+    instance_halls_of_valor(InstanceMap* map) : InstanceScript(map) { }
 
     void Initialize() override
     {
